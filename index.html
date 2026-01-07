@@ -1,0 +1,23 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Empire Idle: Stars</title>
+<script src="https://telegram.org/js/telegram-web-app.js"></script>
+</head>
+<body>
+<h1>Empire Idle: Stars</h1>
+<div id="hud">⭐ <span id="stars">0</span></div>
+<button onclick="buyVIP()">Buy VIP</button>
+
+<script>
+const tg = window.Telegram.WebApp;
+tg.ready();
+
+function buyVIP(){
+  tg.openInvoice('VIP_30');
+}
+</script>
+</body>
+</html>
