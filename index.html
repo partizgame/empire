@@ -1,25 +1,30 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>Empire Idle: Stars</title>
+  <meta charset="UTF-8">
+  <title>Empire Idle</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
-  <h1>Empire Idle</h1>
 
-  <button onclick="buyVIP()">BUY VIP (7 DAYS)</button>
+<h1>Empire Idle</h1>
+<button onclick="buyVIP()">BUY VIP</button>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();
+<script>
+const tg = Telegram.WebApp;
+tg.ready();
 
-    function buyVIP() {
-      tg.sendData(JSON.stringify({
-        action: "buy_vip",
-        product: "VIP_7"
-      }));
-    }
-  </script>
+async function buyVIP() {
+  const res = await fetch("https://ТВОЙ_BACKEND_URL/create-invoice", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ product: "VIP_7" })
+  });
+
+  const data = await res.json();
+  tg.openInvoice(data.invoice_link);
+}
+</script>
+
 </body>
 </html>
