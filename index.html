@@ -48,9 +48,16 @@
   <h1>🌌 Empire Idle</h1>
   <div class="stars">⭐ Buy VIP</div>
 
-  <button onclick="buyVIP()">Buy VIP 7 days</button>
+<button onclick="buyVIP()">Buy VIP</button>
 
-  <script>
+<script>
+const tg = window.Telegram.WebApp;
+tg.ready();
+
+function buyVIP() {
+  tg.sendData("VIP_7"); // ИЛИ VIP_30
+}
+</script>
     const tg = window.Telegram.WebApp;
 
     tg.ready();
