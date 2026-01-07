@@ -1,3 +1,10 @@
+сделай весь index.html
+
+Отлично, делаем 👍
+Ниже ПОЛНЫЙ, ГОТОВЫЙ index.html ЦЕЛИКОМ, без сокращений.
+Ты можешь просто заменить файл целиком.
+
+✅ ГОТОВЫЙ frontend/index.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,60 +16,121 @@
 
   <style>
     body {
-      background: #0f1220;
-      color: #fff;
+      margin: 0;
+      padding: 20px;
+      background: #0f172a;
+      color: #e5e7eb;
       font-family: Arial, sans-serif;
+    }
+
+    h1 {
+      margin-top: 0;
       text-align: center;
-      padding: 40px;
+    }
+
+    .hud {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    .card {
+      background: #020617;
+      border-radius: 12px;
+      padding: 16px;
+      margin-bottom: 16px;
     }
 
     button {
-      background: #ffd700;
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
       border: none;
-      padding: 15px 25px;
-      font-size: 18px;
-      border-radius: 12px;
+      font-size: 16px;
       cursor: pointer;
+      background: #facc15;
+      color: #020617;
+      font-weight: bold;
     }
 
-    button:hover {
-      opacity: 0.9;
+    button:active {
+      transform: scale(0.98);
+    }
+
+    .vip {
+      color: #facc15;
+      font-weight: bold;
     }
   </style>
 </head>
+
 <body>
 
-  <h1>Empire Idle: Stars</h1>
-  <p>VIP unlocks faster progress ⭐</p>
+  <h1>🏰 Empire Idle</h1>
 
-  <button onclick="buyVIP('VIP_7')">Buy VIP (7 days)</button>
+  <div class="hud">
+    <div>⭐ Stars: <span id="stars">0</span></div>
+    <div class="vip" id="vipStatus">VIP: NO</div>
+  </div>
+
+  <div class="card">
+    <h2>VIP Access</h2>
+    <p>Get bonuses and faster progress.</p>
+    <button onclick="buyVIP('VIP_7')">Buy VIP 7 days</button>
+    <br><br>
+    <button onclick="buyVIP('VIP_30')">Buy VIP 30 days</button>
+  </div>
 
   <script>
     const tg = window.Telegram.WebApp;
     tg.ready();
+    tg.expand();
+
+    // demo state
+    let stars = 0;
+    let isVIP = false;
+
+    function updateUI() {
+      document.getElementById("stars").innerText = stars;
+      document.getElementById("vipStatus").innerText = isVIP ? "VIP: YES" : "VIP: NO";
+    }
 
     async function buyVIP(product) {
       try {
-        const response = await fetch("http://localhost:3000/create-invoice", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ product })
-        });
+        const res = await fetch(
+          "https://reserved-cet-mac-financing.trycloudflare.com/create-invoice",
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ product })
+          }
+        );
 
-        const data = await response.json();
+        const data = await res.json();
 
-        if (!data.ok) {
+        if (data.ok && data.result) {
+          tg.openInvoice(data.result);
+        } else {
           alert("Invoice error");
-          return;
+          console.error(data);
         }
-
-        tg.openInvoice(data.result);
-
       } catch (err) {
-        console.error(err);
         alert("Connection error");
+        console.error(err);
       }
     }
+
+    // Telegram event after payment
+    tg.onEvent("invoiceClosed", (event) => {
+      if (event.status === "paid") {
+        isVIP = true;
+        alert("VIP activated!");
+        updateUI();
+      }
+    });
+
+    updateUI();
   </script>
 
 </body>
