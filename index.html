@@ -1,31 +1,30 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Empire Idle</title>
+  <meta charset="UTF-8" />
+  <title>Empire Idle: Stars</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
-<body style="background:#111;color:white;text-align:center;padding-top:40px">
+<body>
 
 <h1>Empire Idle</h1>
-
-<button id="vip">BUY VIP</button>
+<button id="buyVip">Buy VIP</button>
 
 <script>
   const tg = window.Telegram.WebApp;
+
   tg.ready();
+  alert("1️⃣ Telegram WebApp loaded");
 
-  alert("Telegram WebApp loaded");
+  document.getElementById("buyVip").onclick = () => {
+    alert("2️⃣ Button clicked");
 
-  document.getElementById("vip").onclick = () => {
-    alert("Button clicked");
+    tg.sendData(JSON.stringify({
+      action: "buy_vip",
+      product: "VIP_7"
+    }));
 
-  Telegram.WebApp.sendData(JSON.stringify({
-  action: "buy_vip",
-  product: "VIP_7"
-}));
-
-    alert("Data sent to bot");
+    alert("3️⃣ Data sent to bot");
   };
 </script>
 
