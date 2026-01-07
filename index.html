@@ -91,9 +91,7 @@
 
     async function buyVIP(product) {
       try {
-        const res = await fetch(
-          "https://https://reserved-cet-mac-financing.trycloudflare.com/create-invoice",
-          {
+        const res = await fetch("https://reserved-cet-mac-financing.trycloudflare.com/create-invoice", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ product })
