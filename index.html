@@ -20,10 +20,10 @@
   document.getElementById("vip").onclick = () => {
     alert("Button clicked");
 
-    tg.sendData(JSON.stringify({
-      action: "buy_vip",
-      product: "VIP_7"
-    }));
+  Telegram.WebApp.sendData(JSON.stringify({
+  action: "buy_vip",
+  product: "VIP_7"
+}));
 
     alert("Data sent to bot");
   };
