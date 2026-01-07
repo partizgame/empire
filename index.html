@@ -1,50 +1,33 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <title>Empire Idle: Stars</title>
-
-  <!-- Telegram SDK -->
+  <meta charset="UTF-8">
+  <title>Empire Idle</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #0e0e0e;
-      color: white;
-      text-align: center;
-      padding-top: 50px;
-    }
-
-    button {
-      padding: 15px 30px;
-      font-size: 18px;
-      background: gold;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-    }
-  </style>
 </head>
-<body>
+<body style="background:#111;color:white;text-align:center;padding-top:40px">
 
-  <h1>⭐ Empire Idle</h1>
-  <p>VIP доступ за Telegram Stars</p>
+<h1>Empire Idle</h1>
 
-  <button onclick="buyVIP()">💎 Buy VIP</button>
+<button id="vip">BUY VIP</button>
 
-  <script>
-    const tg = window.Telegram.WebApp;
-    tg.ready();
+<script>
+  const tg = window.Telegram.WebApp;
+  tg.ready();
 
-    function buyVIP() {
-      // 🔥 ЭТО ГЛАВНОЕ
-      tg.sendData(JSON.stringify({
-        action: "buy_vip",
-        product: "VIP_7"
-      }));
-    }
-  </script>
+  alert("Telegram WebApp loaded");
+
+  document.getElementById("vip").onclick = () => {
+    alert("Button clicked");
+
+    tg.sendData(JSON.stringify({
+      action: "buy_vip",
+      product: "VIP_7"
+    }));
+
+    alert("Data sent to bot");
+  };
+</script>
 
 </body>
 </html>
