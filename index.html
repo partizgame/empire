@@ -4,64 +4,63 @@
   <meta charset="UTF-8" />
   <title>Empire Idle: Stars</title>
 
-  <!-- Telegram WebApp SDK -->
+  <!-- Telegram Mini App SDK -->
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background: #0f1220;
-      color: white;
+      margin: 0;
+      padding: 20px;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #0f172a;
+      color: #e5e7eb;
       text-align: center;
-      padding: 30px;
     }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .stars {
+      font-size: 20px;
+      margin-bottom: 30px;
+    }
+
     button {
-      padding: 15px 30px;
-      font-size: 18px;
+      background: #facc15;
+      color: #000;
       border: none;
-      border-radius: 10px;
-      background: #ffd700;
+      border-radius: 12px;
+      padding: 16px 24px;
+      font-size: 18px;
       cursor: pointer;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    button:active {
+      transform: scale(0.98);
     }
   </style>
 </head>
 
 <body>
-  <h1>⭐ Empire Idle: Stars</h1>
-  <p>Buy VIP using Telegram Stars</p>
+  <h1>🌌 Empire Idle</h1>
+  <div class="stars">⭐ Buy VIP</div>
 
-  <button onclick="buyVIP()">Buy VIP (7⭐)</button>
+  <button onclick="buyVIP()">Buy VIP 7 days</button>
 
   <script>
     const tg = window.Telegram.WebApp;
+
     tg.ready();
-    tg.expand();
+    tg.expand(); // разворачиваем Mini App полностью
 
-    async function buyVIP() {
-      try {
-        const res = await fetch(
-          "https://reserved-cet-mac-financing.trycloudflare.com/create-invoice",
-          {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ product: "VIP_7" })
-          }
-        );
-
-        const data = await res.json();
-
-        if (!data.ok) {
-          alert("Invoice error");
-          return;
-        }
-
-        tg.openInvoice(data.result);
-      } catch (e) {
-        alert("Connection error");
-        console.error(e);
-      }
+    function buyVIP() {
+      tg.sendData(JSON.stringify({
+        action: "buy_vip",
+        product: "VIP_7"
+      }));
     }
   </script>
 </body>
