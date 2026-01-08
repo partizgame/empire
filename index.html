@@ -13,19 +13,22 @@ alert("Platform: " + tg.platform);
 <script>
   const tg = window.Telegram.WebApp;
 
-  // ⬇️ ВОТ СЮДА
   tg.ready();
-  alert("Platform: " + tg.platform);
+  alert("1️⃣ Telegram WebApp loaded");
 
   document.getElementById("buyVip").onclick = () => {
-    alert("Button clicked");
+    alert("2️⃣ Button clicked");
 
-    tg.sendData(JSON.stringify({
+    const payload = {
       action: "buy_vip",
       product: "VIP_7"
-    }));
+    };
 
-    alert("Data sent to bot");
+    tg.sendData(JSON.stringify(payload));
+    alert("3️⃣ Data sent to bot");
+
+    // 🔥 ВАЖНО ДЛЯ iOS
+    tg.close();
   };
 </script>
 
