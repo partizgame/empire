@@ -15,13 +15,7 @@
 
 <script>
   const tg = window.Telegram.WebApp;
-  tg.ready();
-  tg.expand(); // ⬅️ ВАЖНО
-
-  document.getElementById("buyVip").onclick = () => {
-    alert("КНОПКА НАЖАТА"); // ⬅️ ОБЯЗАТЕЛЬНО
-    tg.sendData(JSON.stringify({ action: "buy_vip" }));
-  };
+  alert("initData = " + tg.initData);
 </script>
 
 </body>
