@@ -15,7 +15,6 @@
 
   tg.ready();
   alert("1️⃣ Telegram WebApp loaded");
-  alert("Platform: " + tg.platform);
 
   document.getElementById("buyVip").onclick = () => {
     alert("2️⃣ Button clicked");
@@ -28,7 +27,7 @@
     tg.sendData(JSON.stringify(payload));
     alert("3️⃣ Data sent to bot");
 
-    // ❗ КРИТИЧЕСКИ ВАЖНО ДЛЯ iOS
+    // ❗ ОБЯЗАТЕЛЬНО ДЛЯ iOS
     tg.close();
   };
 </script>
