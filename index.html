@@ -1,54 +1,50 @@
+  }
+
+  if (data.action !== "buy_vip") return;
+
+  console.log("💳 SENDING INVOICE...");
+
+  await bot.sendInvoice(
+    msg.chat.id,
+    "VIP доступ ⭐",
+    "VIP на 7 дней",
+    "VIP_7",     // payload
+    "",          // provider_token — ПУСТО для Stars
+    "XTR",       // валюта Stars
+    [
+      { label: "VIP 7 дней", amount: 50 }
+    ]
+  );
+});
+✅ index.html (ПОЛНОСТЬЮ)
+html
+Копировать код
 <!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <title>Empire Idle ⭐</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
-  <style>
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-      background: #0f1220;
-      color: white;
-      text-align: center;
-      padding-top: 40px;
-    }
-    button {
-      font-size: 20px;
-      padding: 14px 28px;
-      border-radius: 12px;
-      border: none;
-      background: #ffd700;
-      color: #000;
-      cursor: pointer;
-    }
-  </style>
 </head>
 <body>
 
 <h1>Empire Idle ⭐</h1>
-<p>VIP даёт бонусы и ускорение</p>
 
-<button id="buyVip">Buy VIP</button>
+<button id="buyVip">Buy VIP (50 ⭐)</button>
 
 <script>
   const tg = window.Telegram.WebApp;
 
   tg.ready();
-  tg.expand();
 
   alert("1️⃣ Telegram WebApp loaded");
   alert("Platform: " + tg.platform);
-
-  if (!tg.initDataUnsafe?.user) {
-    alert("❌ NOT A MINI APP CONTEXT");
-  }
 
   document.getElementById("buyVip").onclick = () => {
     alert("2️⃣ Button clicked");
 
     tg.sendData(JSON.stringify({
-      action: "buy_vip",
-      product: "VIP_7"
+      action: "buy_vip"
     }));
 
     alert("3️⃣ Data sent to bot");
