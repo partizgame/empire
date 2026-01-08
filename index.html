@@ -27,8 +27,9 @@
     tg.sendData(JSON.stringify(payload));
     alert("3️⃣ Data sent to bot");
 
-    // 🔴 ВОТ ЭТО КРИТИЧЕСКИ ВАЖНО
-    tg.close();
+    setTimeout(() => {
+      tg.close();
+    }, 300);
   };
 </script>
 
