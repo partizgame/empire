@@ -2,20 +2,24 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Empire Idle ⭐</title>
+  <title>Empire Idle</title>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
 </head>
 <body>
 
-<h1>Empire Idle ⭐</h1>
+<h2>Empire Idle</h2>
 
-<button id="buyVip">Buy VIP</button>
+<button id="buyVip" style="font-size:20px;padding:20px">
+  Buy VIP
+</button>
 
 <script>
   const tg = window.Telegram.WebApp;
   tg.ready();
+  tg.expand(); // ⬅️ ВАЖНО
 
   document.getElementById("buyVip").onclick = () => {
+    alert("КНОПКА НАЖАТА"); // ⬅️ ОБЯЗАТЕЛЬНО
     tg.sendData(JSON.stringify({ action: "buy_vip" }));
   };
 </script>
