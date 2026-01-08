@@ -19,12 +19,15 @@
   document.getElementById("buyVip").onclick = () => {
     alert("2️⃣ Button clicked");
 
-    tg.sendData(JSON.stringify({
+    const payload = {
       action: "buy_vip",
       product: "VIP_7"
-    }));
+    };
 
-    // 🔥 КРИТИЧЕСКИ ВАЖНО
+    tg.sendData(JSON.stringify(payload));
+    alert("3️⃣ Data sent to bot");
+
+    // 🔴 ВОТ ЭТО КРИТИЧЕСКИ ВАЖНО
     tg.close();
   };
 </script>
